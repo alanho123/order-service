@@ -28,7 +28,8 @@ public class OrderService {
 //        return Mono.just(buildRejectedOrder(isbn, quantity)).flatMap(orderRepository::save);
         return bookClient.getBookByIsbn(isbn)
             .map(book -> buildAcceptedOrder(book, quantity))
-            .defaultIfEmpty(buildRejectedOrder(isbn, quantity))
+//            .onErrorReturn(buildRejectedOrder(isbn, quantity))      // Jason 404 not found
+            .defaultIfEmpty(buildRejectedOrder(isbn, quantity))   // Jason Empty Object
             .flatMap(orderRepository::save);
     }
 
