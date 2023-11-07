@@ -36,7 +36,7 @@ public class OrderControllerWebFluxTests {
         .willReturn(Mono.just(expectedOrder));
     webTestClient
         .post()
-        .uri("/orders/")
+        .uri("/orders")
         .bodyValue(orderRequest)
         .exchange()
         .expectStatus().is2xxSuccessful()
